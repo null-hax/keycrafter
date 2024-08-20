@@ -25,7 +25,7 @@ ChartJS.register(
 const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettings }) => {
   const [currentTime, setCurrentTime] = useState("");
   const [currentValue, setCurrentValue] = useState("");
-  const [pastedJSON, setPastedJSON] = useState("");
+  const [pastedJSON, setPastedJSON] = useState("0:(1.000),1:(0.950),2:(0.810),3:(0.590),4:(0.310),5:(0.000),6:(-0.310),7:(-0.590),8:(-0.810),9:(-0.950),10:(-1.000),11:(-0.950),12:(-0.810),13:(-0.590),14:(-0.310),15:(0.000),16:(0.310),17:(0.590),18:(0.810),19:(0.950),20:(1.000),21:(0.950),22:(0.810),23:(0.590),24:(0.310),25:(0.000),26:(-0.310),27:(-0.590),28:(-0.810),29:(-0.950),30:(-1.000),31:(-0.950),32:(-0.810),33:(-0.590),34:(-0.310),35:(0.000),36:(0.310),37:(0.590),38:(0.810),39:(0.950),40:(1.000),41:(0.950),42:(0.810),43:(0.590),44:(0.310),45:(0.000),46:(-0.310),47:(-0.590),48:(-0.810),49:(-0.950),50:(-1.000),51:(-0.950),52:(-0.810),53:(-0.590),54:(-0.310),55:(0.000),56:(0.310),57:(0.590),58:(0.810),59:(0.950),60:(1.000),61:(0.950),62:(0.810),63:(0.590),64:(0.310),65:(0.000),66:(-0.310),67:(-0.590),68:(-0.810),69:(-0.950),70:(-1.000),71:(-0.950),72:(-0.810),73:(-0.590),74:(-0.310),75:(0.000),76:(0.310),77:(0.590),78:(0.810),79:(0.950),80:(1.000),81:(0.950),82:(0.810),83:(0.590),84:(0.310),85:(0.000),86:(-0.310),87:(-0.590),88:(-0.810),89:(-0.950),90:(-1.000),91:(-0.950),92:(-0.810),93:(-0.590),94:(-0.310),95:(0.000),96:(0.310),97:(0.590),98:(0.810),99:(0.950),100:(1.000),101:(0.950),102:(0.810),103:(0.590),104:(0.310),105:(0.000),106:(-0.310),107:(-0.590),108:(-0.810),109:(-0.950),110:(-1.000),111:(-0.950),112:(-0.810),113:(-0.590),114:(-0.310),115:(0.000),116:(0.310),117:(0.590),118:(0.810),119:(0.950)");
 
   const { randomMin, randomMax, randomKeyframeCount, maxFrameNumber } = settings;
 
@@ -131,9 +131,17 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
         };
       }).filter(keyframe => keyframe.time >= 0);
 
-      setKeyframes(
-        [...keyframes, ...newKeyframes].sort((a, b) => a.time - b.time)
-      );
+      const updatedKeyframes = [...keyframes];
+      newKeyframes.forEach((newKeyframe) => {
+        const existingIndex = updatedKeyframes.findIndex(kf => kf.time === newKeyframe.time);
+        if (existingIndex !== -1) {
+          updatedKeyframes[existingIndex].value = newKeyframe.value;
+        } else {
+          updatedKeyframes.push(newKeyframe);
+        }
+      });
+
+      setKeyframes(updatedKeyframes.sort((a, b) => a.time - b.time));
       setPastedJSON("");
     } catch (error) {
       alert("Error parsing input. Please check your format and try again.");
