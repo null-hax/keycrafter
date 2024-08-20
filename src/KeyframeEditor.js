@@ -189,7 +189,6 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       },
       legend: {
         display: true,
-        text: "Value",
         labels: {
           color: darkMode ? "#f8f8f2" : "#282a36",
         },
@@ -199,7 +198,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       x: {
         title: {
           display: false,
-          text: "Value",
+          text: "Keyframes",
           color: darkMode ? "#f8f8f2" : "#282a36",
         },
         ticks: {
@@ -457,9 +456,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                     }
                   >
                     <td className="p-2 w-2/5">
-                      <label htmlFor={`time-${index}`} className="sr-only">Frame</label>
                       <input
-                        id={`time-${index}`}
                         type="number"
                         value={keyframe.time}
                         onChange={(e) =>
@@ -470,13 +467,10 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-background-700 border-dracula-background-600 text-dracula-foreground"
                             : "bg-dracula-foreground border-dracula-background-300"
                         }`}
-                        aria-label={`Frame for keyframe ${index + 1}`}
                       />
                     </td>
                     <td className="p-2 w-2/5">
-                      <label htmlFor={`value-${index}`} className="sr-only">Value</label>
                       <input
-                        id={`value-${index}`}
                         type="number"
                         value={keyframe.value}
                         onChange={(e) =>
@@ -487,7 +481,6 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-background-700 border-dracula-background-600 text-dracula-foreground"
                             : "bg-dracula-foreground border-dracula-background-300"
                         }`}
-                        aria-label={`Value for keyframe ${index + 1}`}
                       />
                     </td>
                     <td className="p-2 w-1/5 text-center">
@@ -498,9 +491,8 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-red-800 hover:bg-dracula-red-700"
                             : "bg-dracula-red-500 hover:bg-dracula-red-600"
                         } text-dracula-foreground`}
-                        aria-label={`Remove keyframe ${index + 1}`}
                       >
-                        <FaRegTrashAlt aria-hidden="true" />
+                        <FaRegTrashAlt />
                       </button>
                       <button
                         onClick={() => randomizeKeyframe(index)}
@@ -509,9 +501,8 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-purple-800 hover:bg-dracula-purple-700"
                             : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
                         } text-dracula-foreground`}
-                        aria-label={`Randomize keyframe ${index + 1}`}
                       >
-                        <FaDice aria-hidden="true" />
+                        <FaDice />
                       </button>
                     </td>
                   </tr>
