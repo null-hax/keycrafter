@@ -278,7 +278,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
               onClick={parseAndAddKeyframes}
               className={`mt-2 px-4 py-2 rounded ${
                 darkMode
-                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
+                  ? "bg-dracula-cyan-700 hover:bg-dracula-cyan-600"
                   : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
               } text-dracula-foreground`}
             >
@@ -423,7 +423,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
               onClick={addKeyframe}
               className={`px-4 py-1 w-1/3 rounded ${
                 darkMode
-                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
+                  ? "bg-dracula-cyan-700 hover:bg-dracula-cyan-600"
                   : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
               } text-dracula-foreground`}
             >
@@ -456,7 +456,9 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                     }
                   >
                     <td className="p-2 w-2/5">
+                      <label htmlFor={`time-${index}`} className="sr-only">Frame</label>
                       <input
+                        id={`time-${index}`}
                         type="number"
                         value={keyframe.time}
                         onChange={(e) =>
@@ -467,10 +469,13 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-background-700 border-dracula-background-600 text-dracula-foreground"
                             : "bg-dracula-foreground border-dracula-background-300"
                         }`}
+                        aria-label={`Frame for keyframe ${index + 1}`}
                       />
                     </td>
                     <td className="p-2 w-2/5">
+                      <label htmlFor={`value-${index}`} className="sr-only">Value</label>
                       <input
+                        id={`value-${index}`}
                         type="number"
                         value={keyframe.value}
                         onChange={(e) =>
@@ -481,6 +486,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-background-700 border-dracula-background-600 text-dracula-foreground"
                             : "bg-dracula-foreground border-dracula-background-300"
                         }`}
+                        aria-label={`Value for keyframe ${index + 1}`}
                       />
                     </td>
                     <td className="p-2 w-1/5 text-center">
@@ -491,8 +497,9 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-red-800 hover:bg-dracula-red-700"
                             : "bg-dracula-red-500 hover:bg-dracula-red-600"
                         } text-dracula-foreground`}
+                        aria-label={`Remove keyframe ${index + 1}`}
                       >
-                        <FaRegTrashAlt />
+                        <FaRegTrashAlt aria-hidden="true" />
                       </button>
                       <button
                         onClick={() => randomizeKeyframe(index)}
@@ -501,8 +508,9 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                             ? "bg-dracula-purple-800 hover:bg-dracula-purple-700"
                             : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
                         } text-dracula-foreground`}
+                        aria-label={`Randomize keyframe ${index + 1}`}
                       >
-                        <FaDice />
+                        <FaDice aria-hidden="true" />
                       </button>
                     </td>
                   </tr>
@@ -564,7 +572,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
               }}
               className={`absolute top-2 right-2 px-3 py-1 rounded ${
                 darkMode
-                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
+                  ? "bg-dracula-cyan-700 hover:bg-dracula-cyan-600"
                   : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
               } text-dracula-foreground`}
             >
