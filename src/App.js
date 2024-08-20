@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import KeyframeEditor from './KeyframeEditor';
 
 const DEFAULT_KEYFRAMES = [
@@ -133,10 +132,7 @@ const DEFAULT_SETTINGS = {
 };
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedMode = Cookies.get('darkMode');
-    return savedMode === undefined ? true : savedMode === 'true';
-  });
+  const [darkMode, setDarkMode] = useState(true, {});
 
   const [keyframes, setKeyframes] = useState(() => {
     const savedKeyframes = localStorage.getItem('keyframes');
@@ -162,7 +158,6 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    Cookies.set('darkMode', darkMode.toString(), { expires: 365 });
   }, [darkMode]);
 
   const resetAllSettings = () => {
