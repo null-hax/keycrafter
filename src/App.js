@@ -192,7 +192,11 @@ function App() {
         </div>
       </main>
       <footer className={`fixed bottom-0 left-0 right-0 py-2 text-center text-sm ${darkMode ? 'bg-dracula-background-800 text-dracula-foreground-300' : 'bg-dracula-foreground-100 text-dracula-background-600'}`}>
-        <p>made by <a href="https://twitter.com/null_hax" target="_blank" rel="noopener noreferrer" className="hover:underline">@null_hax</a></p>
+        <p>
+            view source on <a href="https://github.com/null-hax/keycrafter" target="_blank" rel="noopener noreferrer" className="hover:underline">GitHub</a>
+          {' | '}
+          made by <a href="https://twitter.com/null_hax" target="_blank" rel="noopener noreferrer" className="hover:underline">@null_hax</a>
+        </p>
       </footer>
     </div>
   );
