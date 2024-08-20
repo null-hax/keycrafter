@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/keycrafter/static/css/main.d175e1f8.css",
-    "main.js": "/keycrafter/static/js/main.e44f97fc.js",
+    "main.js": "/keycrafter/static/js/main.1e6f7985.js",
     "index.html": "/keycrafter/index.html",
     "main.d175e1f8.css.map": "/keycrafter/static/css/main.d175e1f8.css.map",
-    "main.e44f97fc.js.map": "/keycrafter/static/js/main.e44f97fc.js.map"
+    "main.1e6f7985.js.map": "/keycrafter/static/js/main.1e6f7985.js.map"
   },
   "entrypoints": [
     "static/css/main.d175e1f8.css",
-    "static/js/main.e44f97fc.js"
+    "static/js/main.1e6f7985.js"
   ]
 }
