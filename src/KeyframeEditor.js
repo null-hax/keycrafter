@@ -22,148 +22,23 @@ ChartJS.register(
   dragData
 );
 
-const DEFAULT_KEYFRAMES = [
-  { time: 0, value: 1 },
-  { time: 1, value: 0.95 },
-  { time: 2, value: 0.81 },
-  { time: 3, value: 0.59 },
-  { time: 4, value: 0.31 },
-  { time: 5, value: 0 },
-  { time: 6, value: -0.31 },
-  { time: 7, value: -0.59 },
-  { time: 8, value: -0.81 },
-  { time: 9, value: -0.95 },
-  { time: 10, value: -1 },
-  { time: 11, value: -0.95 },
-  { time: 12, value: -0.81 },
-  { time: 13, value: -0.59 },
-  { time: 14, value: -0.31 },
-  { time: 15, value: 0 },
-  { time: 16, value: 0.31 },
-  { time: 17, value: 0.59 },
-  { time: 18, value: 0.81 },
-  { time: 19, value: 0.95 },
-  { time: 20, value: 1 },
-  { time: 21, value: 0.95 },
-  { time: 22, value: 0.81 },
-  { time: 23, value: 0.59 },
-  { time: 24, value: 0.31 },
-  { time: 25, value: 0 },
-  { time: 26, value: -0.31 },
-  { time: 27, value: -0.59 },
-  { time: 28, value: -0.81 },
-  { time: 29, value: -0.95 },
-  { time: 30, value: -1 },
-  { time: 31, value: -0.95 },
-  { time: 32, value: -0.81 },
-  { time: 33, value: -0.59 },
-  { time: 34, value: -0.31 },
-  { time: 35, value: 0 },
-  { time: 36, value: 0.31 },
-  { time: 37, value: 0.59 },
-  { time: 38, value: 0.81 },
-  { time: 39, value: 0.95 },
-  { time: 40, value: 1 },
-  { time: 41, value: 0.95 },
-  { time: 42, value: 0.81 },
-  { time: 43, value: 0.59 },
-  { time: 44, value: 0.31 },
-  { time: 45, value: 0 },
-  { time: 46, value: -0.31 },
-  { time: 47, value: -0.59 },
-  { time: 48, value: -0.81 },
-  { time: 49, value: -0.95 },
-  { time: 50, value: -1 },
-  { time: 51, value: -0.95 },
-  { time: 52, value: -0.81 },
-  { time: 53, value: -0.59 },
-  { time: 54, value: -0.31 },
-  { time: 55, value: 0 },
-  { time: 56, value: 0.31 },
-  { time: 57, value: 0.59 },
-  { time: 58, value: 0.81 },
-  { time: 59, value: 0.95 },
-  { time: 60, value: 1 },
-  { time: 61, value: 0.95 },
-  { time: 62, value: 0.81 },
-  { time: 63, value: 0.59 },
-  { time: 64, value: 0.31 },
-  { time: 65, value: 0 },
-  { time: 66, value: -0.31 },
-  { time: 67, value: -0.59 },
-  { time: 68, value: -0.81 },
-  { time: 69, value: -0.95 },
-  { time: 70, value: -1 },
-  { time: 71, value: -0.95 },
-  { time: 72, value: -0.81 },
-  { time: 73, value: -0.59 },
-  { time: 74, value: -0.31 },
-  { time: 75, value: 0 },
-  { time: 76, value: 0.31 },
-  { time: 77, value: 0.59 },
-  { time: 78, value: 0.81 },
-  { time: 79, value: 0.95 },
-  { time: 80, value: 1 },
-  { time: 81, value: 0.95 },
-  { time: 82, value: 0.81 },
-  { time: 83, value: 0.59 },
-  { time: 84, value: 0.31 },
-  { time: 85, value: 0 },
-  { time: 86, value: -0.31 },
-  { time: 87, value: -0.59 },
-  { time: 88, value: -0.81 },
-  { time: 89, value: -0.95 },
-  { time: 90, value: -1 },
-  { time: 91, value: -0.95 },
-  { time: 92, value: -0.81 },
-  { time: 93, value: -0.59 },
-  { time: 94, value: -0.31 },
-  { time: 95, value: 0 },
-  { time: 96, value: 0.31 },
-  { time: 97, value: 0.59 },
-  { time: 98, value: 0.81 },
-  { time: 99, value: 0.95 },
-  { time: 100, value: 1 },
-  { time: 101, value: 0.95 },
-  { time: 102, value: 0.81 },
-  { time: 103, value: 0.59 },
-  { time: 104, value: 0.31 },
-  { time: 105, value: 0 },
-  { time: 106, value: -0.31 },
-  { time: 107, value: -0.59 },
-  { time: 108, value: -0.81 },
-  { time: 109, value: -0.95 },
-  { time: 110, value: -1 },
-  { time: 111, value: -0.95 },
-  { time: 112, value: -0.81 },
-  { time: 113, value: -0.59 },
-  { time: 114, value: -0.31 },
-  { time: 115, value: 0 },
-  { time: 116, value: 0.31 },
-  { time: 117, value: 0.59 },
-  { time: 118, value: 0.81 },
-  { time: 119, value: 0.95 },
-];
-
-const KeyframeEditor = ({ darkMode }) => {
-  const [keyframes, setKeyframes] = useState(() => {
-    const savedKeyframes = localStorage.getItem("keyframes");
-    return savedKeyframes ? JSON.parse(savedKeyframes) : DEFAULT_KEYFRAMES;
-  });
+const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettings }) => {
   const [currentTime, setCurrentTime] = useState("");
   const [currentValue, setCurrentValue] = useState("");
   const [pastedJSON, setPastedJSON] = useState("");
-  const [randomMin, setRandomMin] = useState(-1);
-  const [randomMax, setRandomMax] = useState(1);
-  const [randomKeyframeCount, setRandomKeyframeCount] = useState(10);
-  const [maxFrameNumber, setMaxFrameNumber] = useState(100);
+
+  const { randomMin, randomMax, randomKeyframeCount, maxFrameNumber } = settings;
 
   useEffect(() => {
     localStorage.setItem("keyframes", JSON.stringify(keyframes));
   }, [keyframes]);
 
-  const updateKeyframesAndSave = (newKeyframes) => {
-    setKeyframes(newKeyframes);
+  useEffect(() => {
+    localStorage.setItem("keyframeSettings", JSON.stringify(settings));
+  }, [settings]);
+
+  const updateSettings = (newSettings) => {
+    setSettings(prevSettings => ({ ...prevSettings, ...newSettings }));
   };
 
   const addKeyframe = () => {
@@ -172,7 +47,7 @@ const KeyframeEditor = ({ darkMode }) => {
         time: parseFloat(currentTime),
         value: parseFloat(currentValue),
       };
-      updateKeyframesAndSave(
+      setKeyframes(
         [...keyframes, newKeyframe].sort((a, b) => a.time - b.time)
       );
       setCurrentTime("");
@@ -182,13 +57,13 @@ const KeyframeEditor = ({ darkMode }) => {
 
   const removeKeyframe = (index) => {
     const updatedKeyframes = keyframes.filter((_, i) => i !== index);
-    updateKeyframesAndSave(updatedKeyframes);
+    setKeyframes(updatedKeyframes);
   };
 
   const updateKeyframe = (index, field, value) => {
     const updatedKeyframes = [...keyframes];
     updatedKeyframes[index][field] = parseFloat(value);
-    updateKeyframesAndSave(updatedKeyframes.sort((a, b) => a.time - b.time));
+    setKeyframes(updatedKeyframes.sort((a, b) => a.time - b.time));
   };
 
   const randomizeKeyframe = (index) => {
@@ -199,7 +74,7 @@ const KeyframeEditor = ({ darkMode }) => {
         (Math.random() * (randomMax - randomMin) + randomMin).toFixed(3)
       ),
     };
-    updateKeyframesAndSave(updatedKeyframes);
+    setKeyframes(updatedKeyframes);
   };
 
   const randomizeAllKeyframes = () => {
@@ -209,7 +84,7 @@ const KeyframeEditor = ({ darkMode }) => {
         (Math.random() * (randomMax - randomMin) + randomMin).toFixed(3)
       ),
     }));
-    updateKeyframesAndSave(updatedKeyframes);
+    setKeyframes(updatedKeyframes);
   };
 
   const generateJSON = () => {
@@ -233,23 +108,20 @@ const KeyframeEditor = ({ darkMode }) => {
       newKeyframes.push({ time, value });
     }
 
-    // Combine new keyframes with existing ones and sort
     const updatedKeyframes = [...keyframes, ...newKeyframes].sort(
       (a, b) => a.time - b.time
     );
 
-    // Remove duplicates based on time
     const uniqueKeyframes = updatedKeyframes.filter(
       (keyframe, index, self) =>
         index === self.findIndex((t) => t.time === keyframe.time)
     );
 
-    updateKeyframesAndSave(uniqueKeyframes);
+    setKeyframes(uniqueKeyframes);
   };
 
   const parseAndAddKeyframes = () => {
     try {
-      // Remove all whitespace and split by commas
       const keyframePairs = pastedJSON.replace(/\s/g, "").split(",");
       const newKeyframes = keyframePairs.map((pair) => {
         const [time, value] = pair.split(":");
@@ -259,7 +131,7 @@ const KeyframeEditor = ({ darkMode }) => {
         };
       });
 
-      updateKeyframesAndSave(
+      setKeyframes(
         [...keyframes, ...newKeyframes].sort((a, b) => a.time - b.time)
       );
       setPastedJSON("");
@@ -275,7 +147,7 @@ const KeyframeEditor = ({ darkMode }) => {
       ...updatedKeyframes[index],
       value: parseFloat(value.toFixed(3)),
     };
-    updateKeyframesAndSave(updatedKeyframes);
+    setKeyframes(updatedKeyframes);
   };
 
   const prepareChartData = useCallback(() => {
@@ -378,46 +250,12 @@ const KeyframeEditor = ({ darkMode }) => {
             darkMode ? "text-dracula-foreground" : "text-dracula-background"
           }`}
         >
-          <h2 className="text-xl font-bold mb-4">Input</h2>
-          <div className="mb-4 flex space-between">
-            <input
-              type="number"
-              placeholder="Time"
-              value={currentTime}
-              onChange={(e) => setCurrentTime(e.target.value)}
-              className={`border rounded px-2 py-1 w-1/4 mr-2 ${
-                darkMode
-                  ? "bg-dracula-background-700 border-dracula-background-600"
-                  : "bg-dracula-foreground border-dracula-background-300"
-              }`}
-            />
-            <input
-              type="number"
-              placeholder="Value"
-              value={currentValue}
-              onChange={(e) => setCurrentValue(e.target.value)}
-              className={`border rounded px-2 py-1 w-1/4 mr-2 ${
-                darkMode
-                  ? "bg-dracula-background-700 border-dracula-background-600"
-                  : "bg-dracula-foreground border-dracula-background-300"
-              }`}
-            />
-            <button
-              onClick={addKeyframe}
-              className={`px-4 py-1 w-1/2 rounded ${
-                darkMode
-                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
-                  : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
-              } text-dracula-foreground`}
-            >
-              Add Keyframe
-            </button>
-          </div>
+          <h2 className="text-xl font-bold mb-4">Setup</h2>
 
           <div className="mb-4 flex flex-col">
             <label
               htmlFor="pastedJSON"
-              className={`block text-md font-medium mb-1 ${
+              className={`block text-md font-medium mb-2 ${
                 darkMode
                   ? "text-dracula-foreground-300"
                   : "text-dracula-background-700"
@@ -452,13 +290,13 @@ const KeyframeEditor = ({ darkMode }) => {
               darkMode ? "text-dracula-foreground" : "text-dracula-background"
             }`}
           >
-            <h2 className="text-md font-medium mb-4">Randomization Range</h2>
+            <h2 className="text-md font-medium mb-2">Randomization Range</h2>
             <div className="mb-4 flex space-between">
               <input
                 type="number"
                 placeholder="Min Value"
                 value={randomMin}
-                onChange={(e) => setRandomMin(parseFloat(e.target.value))}
+                onChange={(e) => updateSettings({ randomMin: parseFloat(e.target.value) })}
                 className={`border rounded px-2 py-1 w-1/2 mr-2 ${
                   darkMode
                     ? "bg-dracula-background-700 border-dracula-background-600"
@@ -469,7 +307,7 @@ const KeyframeEditor = ({ darkMode }) => {
                 type="number"
                 placeholder="Max Value"
                 value={randomMax}
-                onChange={(e) => setRandomMax(parseFloat(e.target.value))}
+                onChange={(e) => updateSettings({ randomMax: parseFloat(e.target.value) })}
                 className={`border rounded px-2 py-1 w-1/2 ${
                   darkMode
                     ? "bg-dracula-background-700 border-dracula-background-600"
@@ -480,76 +318,76 @@ const KeyframeEditor = ({ darkMode }) => {
           </div>
 
           <div
-        className={`w-full mt-4 ${
-          darkMode ? "text-dracula-foreground" : "text-dracula-background"
-        }`}
-      >
-        <h2 className="text-xl font-bold mb-4">Generator</h2>
-        <div className="mb-4 flex flex-col space-between">
-          <div className="flex flex-row mb-4">
-            <div className="relative w-1/2 mr-2">
-              <label
-                htmlFor="randomKeyframeCount"
-                className="block text-sm font-medium mb-1"
-              >
-                Number of Keyframes
-              </label>
-              <input
-                type="number"
-                placeholder="Number of Keyframes"
-                value={randomKeyframeCount}
-                onChange={(e) =>
-                  setRandomKeyframeCount(Math.max(1, parseInt(e.target.value)))
-                }
-                className={`border rounded px-2 py-1 w-full ${
+            className={`w-full mt-4 ${
+              darkMode ? "text-dracula-foreground" : "text-dracula-background"
+            }`}
+          >
+            <h2 className="text-xl font-bold mb-4">Generator</h2>
+            <div className="mb-4 flex flex-col space-between">
+              <div className="flex flex-row mb-4">
+                <div className="relative w-1/2 mr-2">
+                  <label
+                    htmlFor="randomKeyframeCount"
+                    className="block text-sm font-medium mb-1"
+                  >
+                    Number of Keyframes
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Number of Keyframes"
+                    value={randomKeyframeCount}
+                    onChange={(e) =>
+                      updateSettings({ randomKeyframeCount: Math.max(1, parseInt(e.target.value)) })
+                    }
+                    className={`border rounded px-2 py-1 w-full ${
+                      darkMode
+                        ? "bg-dracula-background-700 border-dracula-background-600"
+                        : "bg-dracula-foreground border-dracula-background-300"
+                    }`}
+                    title="The number of random keyframes to generate"
+                  />
+                  <span className="absolute bottom-full left-0 bg-gray-700 text-white text-xs rounded px-2 py-1 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    The number of random keyframes to generate
+                  </span>
+                </div>
+                <div className="relative w-1/2 mr-2">
+                  <label
+                    htmlFor="maxFrameNumber"
+                    className="block text-sm font-medium mb-1"
+                  >
+                    Max Frame Number
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Max Frame Number"
+                    value={maxFrameNumber}
+                    onChange={(e) =>
+                      updateSettings({ maxFrameNumber: Math.max(1, parseInt(e.target.value)) })
+                    }
+                    className={`border rounded px-2 py-1 w-full ${
+                      darkMode
+                        ? "bg-dracula-background-700 border-dracula-background-600"
+                        : "bg-dracula-foreground border-dracula-background-300"
+                    }`}
+                    title="The maximum frame number for generated keyframes"
+                  />
+                  <span className="absolute bottom-full left-0 bg-gray-700 text-white text-xs rounded px-2 py-1 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    The maximum frame number for generated keyframes
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={generateRandomKeyframes}
+                className={`px-4 py-2 w-full rounded ${
                   darkMode
-                    ? "bg-dracula-background-700 border-dracula-background-600"
-                    : "bg-dracula-foreground border-dracula-background-300"
-                }`}
-                title="The number of random keyframes to generate"
-              />
-              <span className="absolute bottom-full left-0 bg-gray-700 text-white text-xs rounded px-2 py-1 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                The number of random keyframes to generate
-              </span>
-            </div>
-            <div className="relative w-1/2 mr-2">
-              <label
-                htmlFor="maxFrameNumber"
-                className="block text-sm font-medium mb-1"
+                    ? "bg-dracula-purple-600 hover:bg-dracula-purple-700"
+                    : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
+                } text-dracula-foreground`}
               >
-                Max Frame Number
-              </label>
-              <input
-                type="number"
-                placeholder="Max Frame Number"
-                value={maxFrameNumber}
-                onChange={(e) =>
-                  setMaxFrameNumber(Math.max(1, parseInt(e.target.value)))
-                }
-                className={`border rounded px-2 py-1 w-full ${
-                  darkMode
-                    ? "bg-dracula-background-700 border-dracula-background-600"
-                    : "bg-dracula-foreground border-dracula-background-300"
-                }`}
-                title="The maximum frame number for generated keyframes"
-              />
-              <span className="absolute bottom-full left-0 bg-gray-700 text-white text-xs rounded px-2 py-1 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                The maximum frame number for generated keyframes
-              </span>
+                Generate Random Keyframes
+              </button>
             </div>
           </div>
-          <button
-            onClick={generateRandomKeyframes}
-            className={`px-4 py-2 w-full rounded ${
-              darkMode
-                ? "bg-dracula-purple-600 hover:bg-dracula-purple-700"
-                : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
-            } text-dracula-foreground`}
-          >
-            Generate Random Keyframes
-          </button>
-        </div>
-      </div>
         </div>
 
         <div
@@ -557,7 +395,41 @@ const KeyframeEditor = ({ darkMode }) => {
             darkMode ? "text-dracula-foreground" : "text-dracula-background"
           }`}
         >
-          <h2 className="text-xl font-semibold mb-2">Keyframes</h2>
+          <h2 className="text-xl font-semibold mb-4">Keyframes</h2>
+          <div className="mb-2 flex space-between">
+            <input
+              type="number"
+              placeholder="Time"
+              value={currentTime}
+              onChange={(e) => setCurrentTime(e.target.value)}
+              className={`border rounded px-2 py-1 w-1/4 mr-2 ${
+                darkMode
+                  ? "bg-dracula-background-700 border-dracula-background-600"
+                  : "bg-dracula-foreground border-dracula-background-300"
+              }`}
+            />
+            <input
+              type="number"
+              placeholder="Value"
+              value={currentValue}
+              onChange={(e) => setCurrentValue(e.target.value)}
+              className={`border rounded px-2 py-1 w-1/4 mr-2 ${
+                darkMode
+                  ? "bg-dracula-background-700 border-dracula-background-600"
+                  : "bg-dracula-foreground border-dracula-background-300"
+              }`}
+            />
+            <button
+              onClick={addKeyframe}
+              className={`px-4 py-1 w-1/2 rounded ${
+                darkMode
+                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
+                  : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
+              } text-dracula-foreground`}
+            >
+              Add Keyframe
+            </button>
+          </div>
           <div className="mb-4 overflow-auto max-h-96">
             <table className="w-full">
               <thead className="sticky top-0">
@@ -642,7 +514,7 @@ const KeyframeEditor = ({ darkMode }) => {
             <>
               <div className="flex mb-4">
                 <button
-                  onClick={() => updateKeyframesAndSave([])}
+                  onClick={() => setKeyframes([])}
                   className={`w-1/2 px-4 py-2 mr-2 rounded ${
                     darkMode
                       ? "bg-dracula-red-800 hover:bg-dracula-red-700"
