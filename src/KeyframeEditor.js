@@ -129,7 +129,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
           time: parseFloat(time),
           value: parseFloat(value.replace(/[()]/g, "")),
         };
-      });
+      }).filter(keyframe => keyframe.time >= 0);
 
       setKeyframes(
         [...keyframes, ...newKeyframes].sort((a, b) => a.time - b.time)
@@ -167,6 +167,26 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
   }, [keyframes]);
 
   const chartData = useMemo(() => prepareChartData(), [prepareChartData]);
+  const [chartKey, setChartKey] = useState(0);
+
+  useEffect(() => {
+    // Trigger chart re-render when keyframes are updated
+    setChartKey(prevKey => prevKey + 1);
+  }, [keyframes]);
+
+  const chartAnimation = {
+    duration: 800,
+    easing: 'easeOutQuart',
+    from: (ctx) => {
+      if (ctx.type === 'data') {
+        return {
+          x: ctx.xCenter,
+          y: ctx.yCenter,
+          opacity: 0
+        };
+      }
+    }
+  };
 
   const chartOptions = {
     responsive: true,
@@ -294,6 +314,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
             <div className="mb-4 flex space-between">
               <input
                 type="number"
+                inputMode="numeric"
                 placeholder="Min Value"
                 value={randomMin}
                 onChange={(e) => updateSettings({ randomMin: parseFloat(e.target.value) })}
@@ -305,6 +326,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
               />
               <input
                 type="number"
+                inputMode="numeric"
                 placeholder="Max Value"
                 value={randomMax}
                 onChange={(e) => updateSettings({ randomMax: parseFloat(e.target.value) })}
@@ -334,6 +356,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                   </label>
                   <input
                     type="number"
+                    inputMode="numeric"
                     placeholder="Number of Keyframes"
                     value={randomKeyframeCount}
                     onChange={(e) =>
@@ -359,6 +382,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                   </label>
                   <input
                     type="number"
+                    inputMode="numeric"
                     placeholder="Max Frame Number"
                     value={maxFrameNumber}
                     onChange={(e) =>
@@ -399,7 +423,9 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
           <div className="mb-2 flex space-between">
             <input
               type="number"
-              placeholder="Time"
+              inputMode="numeric"
+              placeholder="Frame"
+              min={0}
               value={currentTime}
               onChange={(e) => setCurrentTime(e.target.value)}
               className={`border rounded px-2 py-1 w-1/3 mr-2 ${
@@ -410,6 +436,8 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
             />
             <input
               type="number"
+              inputMode="decimal"
+              step=".5"
               placeholder="Value"
               value={currentValue}
               onChange={(e) => setCurrentValue(e.target.value)}
@@ -458,6 +486,8 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                     <td className="p-2 w-2/5">
                       <input
                         type="number"
+                        inputMode="numeric"
+                        min={0}
                         value={keyframe.time}
                         onChange={(e) =>
                           updateKeyframe(index, "time", e.target.value)
@@ -472,6 +502,8 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                     <td className="p-2 w-2/5">
                       <input
                         type="number"
+                        inputMode="decimal"
+                        step=".1"
                         value={keyframe.value}
                         onChange={(e) =>
                           updateKeyframe(index, "value", e.target.value)
