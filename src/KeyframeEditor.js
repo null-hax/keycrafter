@@ -402,7 +402,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
               placeholder="Time"
               value={currentTime}
               onChange={(e) => setCurrentTime(e.target.value)}
-              className={`border rounded px-2 py-1 w-1/4 mr-2 ${
+              className={`border rounded px-2 py-1 w-1/3 mr-2 ${
                 darkMode
                   ? "bg-dracula-background-700 border-dracula-background-600"
                   : "bg-dracula-foreground border-dracula-background-300"
@@ -413,7 +413,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
               placeholder="Value"
               value={currentValue}
               onChange={(e) => setCurrentValue(e.target.value)}
-              className={`border rounded px-2 py-1 w-1/4 mr-2 ${
+              className={`border rounded px-2 py-1 w-1/3 mr-2 ${
                 darkMode
                   ? "bg-dracula-background-700 border-dracula-background-600"
                   : "bg-dracula-foreground border-dracula-background-300"
@@ -421,7 +421,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
             />
             <button
               onClick={addKeyframe}
-              className={`px-4 py-1 w-1/2 rounded ${
+              className={`px-4 py-1 w-1/3 rounded ${
                 darkMode
                   ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
                   : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
@@ -440,9 +440,9 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                       : "bg-dracula-foreground-600"
                   }
                 >
-                  <th className="p-2 text-left text-md">Frame</th>
-                  <th className="p-2 text-left text-md">Value</th>
-                  <th className="p-2 text-left text-md">Actions</th>
+                  <th className="p-2 text-left text-md w-2/5">Frame</th>
+                  <th className="p-2 text-left text-md w-2/5">Value</th>
+                  <th className="p-2 text-left text-md w-1/5">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -455,7 +455,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                         : "border-b"
                     }
                   >
-                    <td className="p-2">
+                    <td className="p-2 w-2/5">
                       <input
                         type="number"
                         value={keyframe.time}
@@ -469,7 +469,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                         }`}
                       />
                     </td>
-                    <td className="p-2">
+                    <td className="p-2 w-2/5">
                       <input
                         type="number"
                         value={keyframe.value}
@@ -483,7 +483,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                         }`}
                       />
                     </td>
-                    <td className="p-2 flex justify-center items-center">
+                    <td className="p-2 w-1/5 text-center">
                       <button
                         onClick={() => removeKeyframe(index)}
                         className={`px-2 py-1 rounded mr-2 ${
