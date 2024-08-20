@@ -486,7 +486,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
                     <td className="p-2 w-1/5 text-center">
                       <button
                         onClick={() => removeKeyframe(index)}
-                        className={`px-2 py-1 rounded mr-2 ${
+                        className={`px-2 py-1 rounded mr-1 sm:mr-2 ${
                           darkMode
                             ? "bg-dracula-red-800 hover:bg-dracula-red-700"
                             : "bg-dracula-red-500 hover:bg-dracula-red-600"
