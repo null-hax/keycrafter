@@ -156,7 +156,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       labels: sortedKeyframes.map((kf) => kf.time),
       datasets: [
         {
-          label: "Keyframes",
+          label: "Value",
           data: sortedKeyframes.map((kf) => kf.value),
           borderColor: "rgb(75, 192, 192)",
           backgroundColor: "rgba(75, 192, 192, 0.5)",
@@ -189,6 +189,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       },
       legend: {
         display: true,
+        text: "Value",
         labels: {
           color: darkMode ? "#f8f8f2" : "#282a36",
         },
@@ -198,7 +199,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       x: {
         title: {
           display: false,
-          text: "Keyframes",
+          text: "Value",
           color: darkMode ? "#f8f8f2" : "#282a36",
         },
         ticks: {
