@@ -155,6 +155,8 @@ const KeyframeEditor = ({ darkMode }) => {
   const [pastedJSON, setPastedJSON] = useState("");
   const [randomMin, setRandomMin] = useState(-1);
   const [randomMax, setRandomMax] = useState(1);
+  const [randomKeyframeCount, setRandomKeyframeCount] = useState(10);
+  const [maxFrameNumber, setMaxFrameNumber] = useState(100);
 
   useEffect(() => {
     localStorage.setItem("keyframes", JSON.stringify(keyframes));
@@ -219,6 +221,30 @@ const KeyframeEditor = ({ darkMode }) => {
       .replace(/"/g, "")
       .replace(/^\{/, "")
       .replace(/\}$/, "");
+  };
+
+  const generateRandomKeyframes = () => {
+    const newKeyframes = [];
+    for (let i = 0; i < randomKeyframeCount; i++) {
+      const time = Math.floor(Math.random() * maxFrameNumber);
+      const value = parseFloat(
+        (Math.random() * (randomMax - randomMin) + randomMin).toFixed(3)
+      );
+      newKeyframes.push({ time, value });
+    }
+
+    // Combine new keyframes with existing ones and sort
+    const updatedKeyframes = [...keyframes, ...newKeyframes].sort(
+      (a, b) => a.time - b.time
+    );
+
+    // Remove duplicates based on time
+    const uniqueKeyframes = updatedKeyframes.filter(
+      (keyframe, index, self) =>
+        index === self.findIndex((t) => t.time === keyframe.time)
+    );
+
+    updateKeyframesAndSave(uniqueKeyframes);
   };
 
   const parseAndAddKeyframes = () => {
@@ -343,16 +369,16 @@ const KeyframeEditor = ({ darkMode }) => {
 
   return (
     <>
-      <div className="mb-4">
+      <div className="mb-4 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600">
         <Line className="max-h-64" data={chartData} options={chartOptions} />
       </div>
       <div className="flex flex-col lg:flex-row">
         <div
-          className={`w-full lg:w-1/2 p-4 mx-auto ${
+          className={`w-full lg:w-1/2 p-4 mx-auto mr-4 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600 ${
             darkMode ? "text-dracula-foreground" : "text-dracula-background"
           }`}
         >
-          <h2 className="text-xl font-bold mb-4">Add Keyframes</h2>
+          <h2 className="text-xl font-bold mb-4">Input</h2>
           <div className="mb-4 flex space-between">
             <input
               type="number"
@@ -391,7 +417,7 @@ const KeyframeEditor = ({ darkMode }) => {
           <div className="mb-4 flex flex-col">
             <label
               htmlFor="pastedJSON"
-              className={`block text-sm font-medium mb-1 ${
+              className={`block text-md font-medium mb-1 ${
                 darkMode
                   ? "text-dracula-foreground-300"
                   : "text-dracula-background-700"
@@ -421,49 +447,118 @@ const KeyframeEditor = ({ darkMode }) => {
               Parse and Add Keyframes
             </button>
           </div>
-          {keyframes.length > 0 && (
-        <div className="w-full">
-          <h2
-            className={`text-xl font-semibold mb-2 ${
+          <div
+            className={`w-full flex flex-col ${
               darkMode ? "text-dracula-foreground" : "text-dracula-background"
             }`}
           >
-            Output
-          </h2>
-          <div className="relative">
-            <pre
-              className={`bg-dracula-foreground-100 p-4 rounded overflow-auto max-h-32 text-wrap ${
-                darkMode
-                  ? "text-dracula-background"
-                  : "text-dracula-background-900"
-              }`}
-            >
-              {generateJSON()}
-            </pre>
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(generateJSON());
-              }}
-              className={`absolute top-2 right-2 px-3 py-1 rounded ${
-                darkMode
-                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
-                  : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
-              } text-dracula-foreground`}
-            >
-              Copy
-            </button>
+            <h2 className="text-md font-medium mb-4">Randomization Range</h2>
+            <div className="mb-4 flex space-between">
+              <input
+                type="number"
+                placeholder="Min Value"
+                value={randomMin}
+                onChange={(e) => setRandomMin(parseFloat(e.target.value))}
+                className={`border rounded px-2 py-1 w-1/2 mr-2 ${
+                  darkMode
+                    ? "bg-dracula-background-700 border-dracula-background-600"
+                    : "bg-dracula-foreground border-dracula-background-300"
+                }`}
+              />
+              <input
+                type="number"
+                placeholder="Max Value"
+                value={randomMax}
+                onChange={(e) => setRandomMax(parseFloat(e.target.value))}
+                className={`border rounded px-2 py-1 w-1/2 ${
+                  darkMode
+                    ? "bg-dracula-background-700 border-dracula-background-600"
+                    : "bg-dracula-foreground border-dracula-background-300"
+                }`}
+              />
+            </div>
           </div>
+
+          <div
+        className={`w-full mt-4 ${
+          darkMode ? "text-dracula-foreground" : "text-dracula-background"
+        }`}
+      >
+        <h2 className="text-xl font-bold mb-4">Generator</h2>
+        <div className="mb-4 flex flex-col space-between">
+          <div className="flex flex-row mb-4">
+            <div className="relative w-1/2 mr-2">
+              <label
+                htmlFor="randomKeyframeCount"
+                className="block text-sm font-medium mb-1"
+              >
+                Number of Keyframes
+              </label>
+              <input
+                type="number"
+                placeholder="Number of Keyframes"
+                value={randomKeyframeCount}
+                onChange={(e) =>
+                  setRandomKeyframeCount(Math.max(1, parseInt(e.target.value)))
+                }
+                className={`border rounded px-2 py-1 w-full ${
+                  darkMode
+                    ? "bg-dracula-background-700 border-dracula-background-600"
+                    : "bg-dracula-foreground border-dracula-background-300"
+                }`}
+                title="The number of random keyframes to generate"
+              />
+              <span className="absolute bottom-full left-0 bg-gray-700 text-white text-xs rounded px-2 py-1 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                The number of random keyframes to generate
+              </span>
+            </div>
+            <div className="relative w-1/2 mr-2">
+              <label
+                htmlFor="maxFrameNumber"
+                className="block text-sm font-medium mb-1"
+              >
+                Max Frame Number
+              </label>
+              <input
+                type="number"
+                placeholder="Max Frame Number"
+                value={maxFrameNumber}
+                onChange={(e) =>
+                  setMaxFrameNumber(Math.max(1, parseInt(e.target.value)))
+                }
+                className={`border rounded px-2 py-1 w-full ${
+                  darkMode
+                    ? "bg-dracula-background-700 border-dracula-background-600"
+                    : "bg-dracula-foreground border-dracula-background-300"
+                }`}
+                title="The maximum frame number for generated keyframes"
+              />
+              <span className="absolute bottom-full left-0 bg-gray-700 text-white text-xs rounded px-2 py-1 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                The maximum frame number for generated keyframes
+              </span>
+            </div>
+          </div>
+          <button
+            onClick={generateRandomKeyframes}
+            className={`px-4 py-2 w-full rounded ${
+              darkMode
+                ? "bg-dracula-purple-600 hover:bg-dracula-purple-700"
+                : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
+            } text-dracula-foreground`}
+          >
+            Generate Random Keyframes
+          </button>
         </div>
-      )}
+      </div>
         </div>
 
         <div
-          className={`w-full lg:w-1/2 p-4 mx-auto ${
+          className={`w-full lg:w-1/2 p-4 mx-auto bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600 ${
             darkMode ? "text-dracula-foreground" : "text-dracula-background"
           }`}
         >
           <h2 className="text-xl font-semibold mb-2">Keyframes</h2>
-          <div className="mb-4 overflow-auto" style={{ maxHeight: "400px" }}>
+          <div className="mb-4 overflow-auto max-h-96">
             <table className="w-full">
               <thead className="sticky top-0">
                 <tr
@@ -473,9 +568,9 @@ const KeyframeEditor = ({ darkMode }) => {
                       : "bg-dracula-foreground-600"
                   }
                 >
-                  <th className="p-2 text-left">Frame</th>
-                  <th className="p-2 text-left">Value</th>
-                  <th className="p-2 text-left">Actions</th>
+                  <th className="p-2 text-left text-md">Frame</th>
+                  <th className="p-2 text-left text-md">Value</th>
+                  <th className="p-2 text-left text-md">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -516,7 +611,7 @@ const KeyframeEditor = ({ darkMode }) => {
                         }`}
                       />
                     </td>
-                    <td className="p-2 text-center">
+                    <td className="p-2 flex justify-center items-center">
                       <button
                         onClick={() => removeKeyframe(index)}
                         className={`px-2 py-1 rounded mr-2 ${
@@ -545,54 +640,67 @@ const KeyframeEditor = ({ darkMode }) => {
           </div>
           {keyframes.length > 0 && (
             <>
-            <div className="flex mb-4">
-              <button
-                onClick={() => updateKeyframesAndSave([])}
-                className={`w-1/2 px-4 py-2 mr-2 rounded ${
-                  darkMode
-                    ? "bg-dracula-red-800 hover:bg-dracula-red-700"
-                    : "bg-dracula-red-500 hover:bg-dracula-red-600"
-                } text-dracula-foreground`}
-              >
-                Remove All Keyframes
-              </button>
-              <button
-                onClick={randomizeAllKeyframes}
-                className={`px-4 py-2  w-1/2 rounded ${
-                  darkMode
-                    ? "bg-dracula-purple-600 hover:bg-dracula-purple-700"
-                    : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
-                } text-dracula-foreground`}
-              >
-                Randomize All
-              </button>
-            </div>
-            <div className={`w-full flex ${darkMode ? 'text-dracula-foreground' : 'text-dracula-background'}`}>
-              <h2 className="text-xl font-bold mb-4">Randomization Range</h2>
-              <div className='mb-4 flex space-between'>
-                <input
-                  type="number"
-                  placeholder="Min Value"
-                  value={randomMin}
-                  onChange={(e) => setRandomMin(parseFloat(e.target.value))}
-                  className={`border rounded px-2 py-1 w-1/2 mr-2 ${darkMode ? 'bg-dracula-background-700 border-dracula-background-600' : 'bg-dracula-foreground border-dracula-background-300'}`}
-                />
-                <input
-                  type="number"
-                  placeholder="Max Value"
-                  value={randomMax}
-                  onChange={(e) => setRandomMax(parseFloat(e.target.value))}
-                  className={`border rounded px-2 py-1 w-1/2 ${darkMode ? 'bg-dracula-background-700 border-dracula-background-600' : 'bg-dracula-foreground border-dracula-background-300'}`}
-                />
-      
+              <div className="flex mb-4">
+                <button
+                  onClick={() => updateKeyframesAndSave([])}
+                  className={`w-1/2 px-4 py-2 mr-2 rounded ${
+                    darkMode
+                      ? "bg-dracula-red-800 hover:bg-dracula-red-700"
+                      : "bg-dracula-red-500 hover:bg-dracula-red-600"
+                  } text-dracula-foreground`}
+                >
+                  Remove All Keyframes
+                </button>
+                <button
+                  onClick={randomizeAllKeyframes}
+                  className={`px-4 py-2  w-1/2 rounded ${
+                    darkMode
+                      ? "bg-dracula-purple-600 hover:bg-dracula-purple-700"
+                      : "bg-dracula-purple-500 hover:bg-dracula-purple-600"
+                  } text-dracula-foreground`}
+                >
+                  Randomize All
+                </button>
               </div>
-            </div>
             </>
           )}
         </div>
       </div>
 
-      
+      {keyframes.length > 0 && (
+        <div className="w-full mt-4 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600">
+          <h2
+            className={`text-xl font-semibold mb-2 ${
+              darkMode ? "text-dracula-foreground" : "text-dracula-background"
+            }`}
+          >
+            Output
+          </h2>
+          <div className="relative">
+            <pre
+              className={`bg-dracula-foreground-100 p-4 rounded overflow-auto max-h-24 text-wrap ${
+                darkMode
+                  ? "text-dracula-background"
+                  : "text-dracula-background-900"
+              }`}
+            >
+              {generateJSON()}
+            </pre>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(generateJSON());
+              }}
+              className={`absolute top-2 right-2 px-3 py-1 rounded ${
+                darkMode
+                  ? "bg-dracula-cyan-600 hover:bg-dracula-cyan-700"
+                  : "bg-dracula-cyan-500 hover:bg-dracula-cyan-600"
+              } text-dracula-foreground`}
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
