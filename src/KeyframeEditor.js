@@ -224,7 +224,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
     },
     font: {
       family:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+        '"Space Mono", monospace',
     },
     interaction: {
       mode: "index",
@@ -246,7 +246,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       </div>
       <div className="flex flex-col lg:flex-row">
         <div
-          className={`w-full lg:w-1/2 p-4 mx-auto mr-4 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600 ${
+          className={`w-full mb-4 lg:mb-0 lg:w-1/2 p-4 mx-auto mr-4 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600 ${
             darkMode ? "text-dracula-foreground" : "text-dracula-background"
           }`}
         >
@@ -540,7 +540,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
       </div>
 
       {keyframes.length > 0 && (
-        <div className="w-full mt-4 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600">
+        <div className="w-full mt-4 mb-8 bg-dracula-background-800 rounded-lg p-4 border border-dracula-background-600">
           <h2
             className={`text-xl font-semibold mb-2 ${
               darkMode ? "text-dracula-foreground" : "text-dracula-background"
@@ -550,7 +550,7 @@ const KeyframeEditor = ({ darkMode, keyframes, setKeyframes, settings, setSettin
           </h2>
           <div className="relative">
             <pre
-              className={`bg-dracula-foreground-100 p-4 rounded overflow-auto max-h-24 text-wrap ${
+              className={`bg-dracula-background-100 p-4 rounded overflow-auto max-h-24 text-wrap ${
                 darkMode
                   ? "text-dracula-background"
                   : "text-dracula-background-900"

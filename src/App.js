@@ -179,7 +179,7 @@ function App() {
           </h1>
           <button
             onClick={resetAllSettings}
-            className={`px-4 py-2 rounded ${darkMode ? 'bg-dracula-red-600 hover:bg-dracula-red-700' : 'bg-dracula-red-500 hover:bg-dracula-red-600'} text-dracula-foreground`}
+            className={`px-4 py-2 rounded ${darkMode ? 'bg-dracula-red-800 hover:bg-dracula-red-700' : 'bg-dracula-red-500 hover:bg-dracula-red-600'} text-dracula-foreground`}
           >
             Reset All
           </button>
@@ -196,6 +196,9 @@ function App() {
           />
         </div>
       </main>
+      <footer className={`fixed bottom-0 left-0 right-0 py-2 text-center text-sm ${darkMode ? 'bg-dracula-background-800 text-dracula-foreground-300' : 'bg-dracula-foreground-100 text-dracula-background-600'}`}>
+        <p>made by <a href="https://twitter.com/null_hax" target="_blank" rel="noopener noreferrer" className="hover:underline">@null_hax</a></p>
+      </footer>
     </div>
   );
 }
