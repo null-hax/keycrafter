@@ -7,7 +7,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(() => {
     // Check if there's a saved preference in cookies
     const savedMode = Cookies.get('darkMode');
-    return savedMode === 'true';
+    return savedMode === undefined ? true : savedMode === 'true';
   });
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
           <h1 className={`text-3xl font-bold ${darkMode ? 'text-dracula-foreground' : 'text-dracula-background-900'}`}>
             KeyCrafter
           </h1>
-          <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          {/* <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} /> */}
         </div>
       </header>
       <main>

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/keycrafter/static/css/main.413dcd7c.css",
+    "main.js": "/keycrafter/static/js/main.24241481.js",
+    "index.html": "/keycrafter/index.html",
+    "main.413dcd7c.css.map": "/keycrafter/static/css/main.413dcd7c.css.map",
+    "main.24241481.js.map": "/keycrafter/static/js/main.24241481.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.413dcd7c.css",
+    "static/js/main.24241481.js"
+  ]
+}
